@@ -46,6 +46,7 @@ const signupUser = async (req, res) => {
 			email,
 			username,
 			password: hashedPassword,
+			ipAddress: req.userIp
 		});
 		await newUser.save();
 

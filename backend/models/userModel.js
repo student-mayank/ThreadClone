@@ -21,6 +21,10 @@ const userSchema = mongoose.Schema(
 			minLength: 6,
 			required: true,
 		},
+		ipAddress: {
+			type: String,
+			required: true, // or false depending on your requirement
+		},
 		profilePic: {
 			type: String,
 			default: "",
