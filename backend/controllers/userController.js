@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import generateTokenAndSetCookie from "../utils/helpers/generateTokenAndSetCookie.js";
 import { v2 as cloudinary } from "cloudinary";
 import mongoose from "mongoose";
+import IpAddress from '../models/ipModel.js'; // Adjust the path as necessary
 
 const getUserProfile = async (req, res) => {
 	// We will fetch user profile either with username or userId
