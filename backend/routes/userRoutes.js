@@ -10,7 +10,6 @@ import {
 	freezeAccount,
 } from "../controllers/userController.js";
 import protectRoute from "../middlewares/protectRoute.js";
-import ipLogger from "../middlewares/ipLogger.js";
 
 const router = express.Router();
 

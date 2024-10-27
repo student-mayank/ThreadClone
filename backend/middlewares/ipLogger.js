@@ -5,7 +5,7 @@ const ipLogger = async (req, res, next) => {
 
     // Store the IP address in the database 
     try {
-        const ipdata = await IpAddress.find({userId:req.user});
+     
         const newIp = new IpAddress({
             ipAddress: ip,
             userId: req.user ? req.user._id : null, // If you have user info in req.user
