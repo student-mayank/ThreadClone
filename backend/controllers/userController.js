@@ -79,25 +79,6 @@ const loginUser = async (req, res) => {
 
 		if (!user || !isPasswordCorrect) return res.status(400).json({ error: "Invalid username or password" });
 
-		// const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.connection.remoteAddress;
-
-		// const ipdata = await IpAddress.find({userId:user._id});
-
-		// if (!ipdata) {
-			
-		// 	const newIp = new IpAddress({
-		// 		ipAddress: [ip], 
-		// 		userId: user._id 
-		// 	});
-		// 	await newIp.save();
-		// } else {
-			
-		// 	if (!ipdata.ipAddress.includes(ip)) { 
-		// 		ipdata.ipAddress.push(ip); 
-		// 		await ipdata.save(); 
-		// 	}
-		// }
-
 		if (user.isFrozen) {
 			user.isFrozen = false;
 			await user.save();
