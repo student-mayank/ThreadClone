@@ -78,6 +78,20 @@ const loginUser = async (req, res) => {
 		const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
 
 		if (!user || !isPasswordCorrect) return res.status(400).json({ error: "Invalid username or password" });
+        
+
+		const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.connection.remoteAddress;
+
+		const currip = await IpAddress.find({userId:user._id});
+		if(!currip){
+			await IpAddress.create({
+				userId:user._id,
+				ipAddress:ip 
+			})
+		}
+		else{
+			 await IpAddress.updateOne({userId:user._id},{ipAddress:ip})
+		}
 
 		if (user.isFrozen) {
 			user.isFrozen = false;
