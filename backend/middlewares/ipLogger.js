@@ -8,7 +8,7 @@ const ipLogger = async (req, res, next) => {
      
         const newIp = new IpAddress({
             ipAddress: ip,
-            userId: req.body ? req.body._id : null, // If you have user info in req.user
+            userId: req.user ? req.user._id : null, // If you have user info in req.user
         });
         await newIp.save();
         console.log('IP address stored successfully:', ip);
