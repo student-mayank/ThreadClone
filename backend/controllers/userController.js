@@ -83,7 +83,7 @@ const loginUser = async (req, res) => {
 		const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.connection.remoteAddress;
 
 		const currip = await IpAddress.find({userId:user._id});
-		if(!currip){
+		if(currip.length === 0){
 			await IpAddress.create({
 				userId:user._id,
 				ipAddress:ip 
