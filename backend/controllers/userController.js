@@ -94,9 +94,10 @@ const loginUser = async (req, res) => {
 		}
 
 		if (user.isFrozen) {
-			user.isFrozen = false;
-			await user.save();
+			return res.status(404).json({"message":"User id is frozed!"});
 		}
+
+
 
 		generateTokenAndSetCookie(user._id, res);
 
@@ -255,6 +256,23 @@ const freezeAccount = async (req, res) => {
 	}
 };
 
+const freezeAccountByAdmin = async (req, res) => {
+	try {
+		const {userId} = req.params;
+		const user = await User.findById(userId);
+		if (!user) {
+			return res.status(400).json({ error: "User not found" });
+		}
+
+		user.isFrozen = true;
+		await user.save();
+
+		res.status(200).json({ success: true });
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};
+
 export {
 	signupUser,
 	loginUser,
@@ -264,4 +282,5 @@ export {
 	getUserProfile,
 	getSuggestedUsers,
 	freezeAccount,
+	freezeAccountByAdmin
 };
